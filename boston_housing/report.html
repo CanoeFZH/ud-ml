@@ -13834,7 +13834,9 @@ LOkZY4wJGpb0jDHGBI3/B7V60UObosthAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>回答: </strong>使用固定步长网格枚举参数组合；枚举参数（pa， pb), 组合(pa1, pb1), (pa1, pb2), (pa2, pb1), (pa2, pb2) ... 进行交叉验证确定该参数下模型好坏，保留交叉验证结果最好的一组参数作为best estimator，作为实际最后使用的模型参数。</p>
+<p><strong>回答: </strong><br>
+问题1： 使用固定网格枚举参数组合；<br>
+问题2：枚举参数（pa， pb), 组合(pa1, pb1), (pa1, pb2), (pa2, pb1), (pa2, pb2) ... 配合进行交叉验证确定该参数下模型好坏，保留交叉验证结果最好的一组参数作为best estimator，作为实际最后使用的模型参数。</p>
 
 </div>
 </div>
@@ -13920,11 +13922,14 @@ cv_results sklearn提供了很多指标可以供参考
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
 
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 
 <span class="k">def</span> <span class="nf">fit_model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Performs grid search over the &#39;max_depth&#39; parameter for a </span>
@@ -13932,7 +13937,7 @@ cv_results sklearn提供了很多指标可以供参考
     
     <span class="c1"># Create cross-validation sets from the training data</span>
     <span class="n">cv_sets</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+   
     <span class="c1"># TODO: Create a decision tree regressor object</span>
     <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     
@@ -13940,11 +13945,11 @@ cv_results sklearn提供了很多指标可以供参考
     <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span> <span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)}</span>
 
     <span class="c1"># TODO: Transform &#39;performance_metric&#39; into a scoring function using &#39;make_scorer&#39; </span>
-    <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
+
     <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">)</span>
     
     <span class="c1"># TODO: Create the grid search object</span>
-    <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+    
     <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring_fnc</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv_sets</span><span class="p">)</span>
 
     <span class="c1"># Fit the grid search object to the data to compute the optimal model</span>
@@ -14185,7 +14190,11 @@ Range in prices: $73,357.39
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>*<em>答案: </em>不实用啦，数据不一致了；不够 容积率 朝向 面积 装修等；不够 出的结果变化范围很大；不适合 地价就不一样*</p>
+<p><strong>答案: </strong><br>
+不实用啦，数据不一致了，因为比如说货币购买力，土地价格，人口数量等以及已有数据中幼儿园老师学生比已经时过境迁；
+不够 容积率 朝向 面积 装修，房子年龄等特征都会影响大房子的价格；<br>
+不够 出的结果变化范围很大，如问题10数据所显示，模型输出是不稳定的；<br>
+不适合 地价就不一样，也就是说模型使用的数据和目标预测数据环境很不一致，导致模型没有对应的泛化能力到其他乡镇</p>
 
 </div>
 </div>
